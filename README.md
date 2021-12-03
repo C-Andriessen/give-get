@@ -10,4 +10,9 @@
 - Geen bullshit
 - Concept presentatie
 - QR codes
-- Gebruiksvriendelijkhijd
+- Gebruiksvriendelijkheid
+
+
+## Nieuwe design
+
+- Echte post-it notes verwerken (word aan gewerkt)
