@@ -13,10 +13,6 @@
 - Gebruiksvriendelijkheid
 
 
-## Nieuwe design
-
-- Echte post-it notes verwerken (word aan gewerkt)
-
 ## Functionaliteiten (nieuw/concepten)
 
 **Mediavormgever:**
