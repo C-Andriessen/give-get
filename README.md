@@ -19,23 +19,20 @@
 
 ## Functionaliteiten (nieuw/concepten)
 
-Mediavormgever:
-
+**Mediavormgever:**
 Delete option
 Realistischer 
 Filter
 Aanbod of hulp
 Simple houden
 Noorderportal?
- -------------------------------------------------------------------------------------------------------------------------------------
-Content Creator:
 
+**Content Creator:**
 Wit op geel moeilijk
 Alleen hier?
 Link delen?
- -------------------------------------------------------------------------------------------------------------------------------------
-Software Developers jaar 1:
 
+**Software Developers jaar 1:**
 Hoe lang geleden beter designen
 Kleur per opleiding
 Post it’s breeder
@@ -43,11 +40,11 @@ Post it scalen naar tekst
 Highlighted cards zelf heen en weer bewegen
 Rating system
 Na bepaalde tijd verivicatie
- -------------------------------------------------------------------------------------------------------------------------------------
-Muzikanten:
 
+**Muzikanten:**
 Eigen design?
 Melding voor jou proffesie
-Ik:
+
+**Ik:**
 Welk jaar?
 Favorieten?
