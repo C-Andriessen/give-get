@@ -13,10 +13,6 @@
 - Gebruiksvriendelijkheid
 
 
-## Nieuwe design
-
-- Echte post-it notes verwerken (word aan gewerkt)
-
 ## Functionaliteiten (nieuw/concepten)
 
 **Mediavormgever:**
@@ -28,7 +24,7 @@
 
 **Content Creator:**
 - Wit op geel moeilijk (aanpassen*)
-- Link delen (JA)
+- Link delen (JA) -- Toegevoegd aan het design (nog overleggen of t goed is)
 
 **Software Developers jaar 1:**
 - Kleur per opleiding (goed plan overleggen)
