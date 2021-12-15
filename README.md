@@ -20,31 +20,27 @@
 ## Functionaliteiten (nieuw/concepten)
 
 **Mediavormgever:**
-- Delete option
-- Realistischer 
-- Filter
-- Aanbod of hulp
-- Simple houden
-- Noorderportal?
+- Delete option (Form maken)
+- Realistischer (Overleg mediavormgevers)
+- Filter (Toevoegen homepage*)
+- Aanbod of hulp (?)
+- Noorderportal (?)
 
 **Content Creator:**
-- Wit op geel moeilijk
-- Alleen hier?
-- Link delen?
+- Wit op geel moeilijk (aanpassen*)
+- Link delen (JA)
 
 **Software Developers jaar 1:**
-- Hoe lang geleden beter designen
-- Kleur per opleiding
-- Post it’s breeder
-- Post it scalen naar tekst
-- Highlighted cards zelf heen en weer bewegen
-- Rating system
-- Na bepaalde tijd verivicatie
+- Kleur per opleiding (goed plan overleggen)
+- Post it’s breeder (??)
+- Post it scalen naar tekst (niet mee eens... tekst scalen niet de post-its) 
+- Highlighted cards zelf heen en weer bewegen (JA)
+- Rating system (?)
+- Na bepaalde tijd verivicatie (JA (Via mail doen we dit!))
 
 **Muzikanten:**
-- Eigen design?
-- Melding voor jou proffesie
+- Eigen design? (Kan, moet er wel echt een fysiek bord komen)
+- Melding voor jou proffesie (JA (Via mail doen we dit!))
 
 **Jouri:**
-- Welk jaar?
-- Favorieten?
+- Favorieten (gekoppeld aan je account)
