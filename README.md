@@ -15,7 +15,7 @@
 
 ## Functionaliteiten (nieuw/concepten)
 
-**Mediavormgever:**
+**Mediavormgevers:**
 - Delete option (Form maken)
 - Realistischer (Overleg mediavormgevers)
 - Filter (Toevoegen homepage*)
