@@ -16,6 +16,16 @@ async function register(req,res) {
         errorMessage: "The passwords must match.",
       });
     }
+
+    const schoolDomainsRegex = ['noorderpoort\.nl'];
+    const emailRegexPattern = new RegExp(`^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(${schoolDomainsRegex.join('|')})$`);
+    
+    if(!email.match(emailRegexPattern)) {
+      const schools = ['noorderpoort'];
+      return res.status(400).json({
+        errorMessage: `Je moet een geldig ${schools.join(', ').replace(/, ([^,]*)$/, ' of $1')} email gebruiken`,
+      });
+    }
   
     if (password.length < 6) {
       return res.status(400).json({
