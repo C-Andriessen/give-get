@@ -15,5 +15,6 @@ mongoose.connect(process.env.MONGODB_CONNECT, (err) => {
 
 app.use(require("morgan")("tiny"));
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
-app.use("/", require("./routers/testRouter"));
+app.use("/api", require("./routers/userRouter"));
