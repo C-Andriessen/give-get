@@ -69,7 +69,12 @@ async function login(req,res) {
       .redirect('/');
   }
 
+  async function logout(req, res) {
+    res.clearCookie("auth-token").redirect('/');
+  }
+
 module.exports = {
     register,
     login,
+    logout,
 }
