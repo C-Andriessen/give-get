@@ -11,10 +11,18 @@ async function auth(req, res, next) {
 
     req.user = user;
 
+    if (!user.active) {
+      return res.status(400).json({
+        errorMessage: "U moet eerst uw email bevestigen",
+      });
+    }
+
     next();
   } catch (err) {
     res.status(401).end();
   }
 }
 
-module.exports = auth;
+module.exports = {
+  auth,
+}

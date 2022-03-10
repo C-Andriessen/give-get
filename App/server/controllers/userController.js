@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
 
 async function register(req,res) {
     const {name, email, password, passwordRepeat } = req.body;
@@ -34,11 +35,13 @@ async function register(req,res) {
 }
 const passwordHash = bcrypt.hashSync(password, await bcrypt.genSalt(10));
 
-await User.create({
+const user = await User.create({
     name,
     email,
     passwordHash,
 });
+
+createAndSendMail(user, email) 
 
 res.redirect('/');
 }
@@ -83,8 +86,49 @@ async function login(req,res) {
     res.clearCookie("auth-token").redirect('/');
   }
 
+  async function confirmEmail (req, res) {
+    try {
+      const { user } = jwt.verify(req.params.token, process.env.EMAIL_SECRET);
+      await User.findByIdAndUpdate(user, {active: true});
+      res.redirect('/');
+    } catch (e){
+      res.send('error');
+    }
+  }
+
+function createAndSendMail(user, email) {
+  var transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS,
+    }
+  });
+  
+  const emailToken = jwt.sign(
+    {
+      user: user._id,
+    },
+    process.env.EMAIL_SECRET,
+    {
+      expiresIn: '1d',
+    },
+  );
+  
+  const url = `http://localhost:5000/api/confirmation/${emailToken}`;
+  
+  transporter.sendMail({
+    from: 'giveandget@dont-reply.com',
+    to: email,
+    subject: 'Bevestig email',
+    html: `Klik op deze link om je email te verifi&euml;ren: <a href="${url}">${url}</a>`,
+  });
+
+  }
+
 module.exports = {
     register,
     login,
     logout,
+    confirmEmail,
 }
