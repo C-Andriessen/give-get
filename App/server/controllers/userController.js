@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 async function register(req,res) {
     const {name, email, password, passwordRepeat } = req.body;
@@ -32,6 +33,43 @@ await User.create({
 res.redirect('/');
 }
 
+async function login(req,res) {
+    const { email, password } = req.body;
+
+    if (!email || !password)
+      return res.status(401).json({
+        errorMessage: "Please enter all required data.",
+      });
+  
+    const userInDB = await User.findOne({ email });
+  
+    if (!userInDB)
+      return res.status(401).json({
+        errorMessage: "Login failed.",
+      });
+  
+    const passwordCorrect = bcrypt.compareSync(password, userInDB.passwordHash);
+  
+    if (!passwordCorrect)
+      return res.status(401).json({
+        errorMessage: "Login failed.",
+      });
+  
+    const token = jwt.sign(
+      {
+        id: userInDB._id,
+      },
+      process.env.JWT_SECRET
+    );
+  
+    res
+      .cookie("auth-token", token, {
+        httpOnly: true,
+      })
+      .redirect('/');
+  }
+
 module.exports = {
     register,
+    login,
 }
