@@ -3,7 +3,6 @@ const Role = require('../models/role');
 const emailController = require('./emailController');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { findByIdAndRemove } = require('../models/user');
 
 async function register(req, res) {
     try{
@@ -112,9 +111,26 @@ async function login(req,res) {
       res.clearCookie("auth-token").redirect('/');
   }
 
+  async function deleteStudent (req, res) {
+    const auth_user = await User.findOne({_id: req.user._id}).populate('role').exec();
+    
+    switch(auth_user.role.name) {
+      case "BEHEERDER":
+      case "DOCENT":
+        await User.findByIdAndDelete(req.body._id).exec();
+        res.redirect('/');
+        break;
+      case "STUDENT":
+        return res.status(400).json({
+          errorMessage: `Je hebt geen rechten om dit uit te voeren`,
+        });
+    }
+  }
+
 module.exports = {
     register,
     login,
     logout,
     deleteSelf,
+    deleteStudent,
 }
