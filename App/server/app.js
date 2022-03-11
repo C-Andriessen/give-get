@@ -19,3 +19,4 @@ app.use(express.json());
 
 app.use("/api", require("./routers/userRouter"));
 app.use("/api", require("./routers/emailRouter"));
+app.use("/seeder", require("./routers/seederRouter"));
