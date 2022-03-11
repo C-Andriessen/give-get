@@ -9,21 +9,21 @@ async function register(req, res) {
 
     if (!name || !email || !password || !passwordRepeat) {
       return res.status(400).json({
-        errorMessage: "Please enter all required fields.",
+        errorMessage: "Vul alsjeblieft alle velden in",
       });
     }
   
     if (password !== passwordRepeat) {
       return res.status(400).json({
-        errorMessage: "The passwords must match.",
+        errorMessage: "De wachtwoorden moeten hetzelfde zijn",
       });
     }
 
-    const schoolDomainsRegex = ['noorderpoort\.nl'];
+    const schoolDomainsRegex = ['noorderpoort\.nl', 'alfa-college\.nl'];
     const emailRegexPattern = new RegExp(`^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(${schoolDomainsRegex.join('|')})$`);
     
     if(!email.match(emailRegexPattern)) {
-      const schools = ['noorderpoort'];
+      const schools = ['Noorderpoort'];
       return res.status(400).json({
         errorMessage: `Je moet een geldig ${schools.join(', ').replace(/, ([^,]*)$/, ' of $1')} email gebruiken`,
       });
@@ -31,7 +31,7 @@ async function register(req, res) {
   
     if (password.length < 6) {
       return res.status(400).json({
-        errorMessage: "The password must be at least 6 characters.",
+        errorMessage: "Het wachtwoord moet tenminste 6 karakters lang zijn",
       });
 }
 const passwordHash = bcrypt.hashSync(password, await bcrypt.genSalt(10));
@@ -61,21 +61,21 @@ async function login(req,res) {
 
     if (!email || !password)
       return res.status(401).json({
-        errorMessage: "Please enter all required data.",
+        errorMessage: "Vul een geldige gebruikersnaam en wacthwoord in",
       });
   
     const userInDB = await User.findOne({ email });
   
     if (!userInDB)
       return res.status(401).json({
-        errorMessage: "Login failed.",
+        errorMessage: "Gebruikersnaam of wachtwoord incorrect",
       });
   
     const passwordCorrect = bcrypt.compareSync(password, userInDB.passwordHash);
   
     if (!passwordCorrect)
       return res.status(401).json({
-        errorMessage: "Login failed.",
+        errorMessage: "Gebruikersnaam of wachtwoord incorrect",
       });
   
     const token = jwt.sign(
