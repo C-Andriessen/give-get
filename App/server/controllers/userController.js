@@ -103,7 +103,7 @@ async function login(req,res) {
     res.clearCookie("auth-token").redirect('/');
   }
 
-  async function deleteUser(req,res) {
+  async function deleteSelf(req,res) {
       await User.findByIdAndDelete(req.user._id);
       res.clearCookie("auth-token").redirect('/');
   }
@@ -112,5 +112,5 @@ module.exports = {
     register,
     login,
     logout,
-    deleteUser,
+    deleteSelf,
 }

@@ -7,6 +7,6 @@ const router = require("express").Router();
 router.post('/register', userController.register);
 router.post('/login', userController.login);
 router.post('/logout', userController.logout);
-router.delete('/confrimDelete', auth, userController.deleteUser);
+router.delete('/confrimDelete', auth, userController.deleteSelf);
 
 module.exports = router;
