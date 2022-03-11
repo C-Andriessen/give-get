@@ -39,6 +39,7 @@ const user = await User.create({
     name,
     email,
     passwordHash,
+    active: false,
 });
 
 createAndSendMail(user, email) 
@@ -86,16 +87,6 @@ async function login(req,res) {
     res.clearCookie("auth-token").redirect('/');
   }
 
-  async function confirmEmail (req, res) {
-    try {
-      const { user } = jwt.verify(req.params.token, process.env.EMAIL_SECRET);
-      await User.findByIdAndUpdate(user, {active: true});
-      res.redirect('/');
-    } catch (e){
-      res.send('error');
-    }
-  }
-
 function createAndSendMail(user, email) {
   var transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -130,5 +121,4 @@ module.exports = {
     register,
     login,
     logout,
-    confirmEmail,
 }
