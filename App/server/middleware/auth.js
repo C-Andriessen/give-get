@@ -11,11 +11,7 @@ async function auth(req, res, next) {
 
     req.user = user;
 
-    if (!user.active) {
-      return res.status(400).json({
-        errorMessage: "U moet eerst uw email bevestigen",
-      });
-    }
+    console.log(user);
 
     next();
   } catch (err) {

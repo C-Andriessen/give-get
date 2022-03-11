@@ -1,7 +1,7 @@
 const User = require('../models/user');
+const emailController = require('./emailController');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const nodemailer = require("nodemailer");
 
 async function register(req, res) {
     try{
@@ -19,7 +19,7 @@ async function register(req, res) {
       });
     }
 
-    const schoolDomainsRegex = ['noorderpoort\.nl', 'alfa-college\.nl'];
+    const schoolDomainsRegex = ['noorderpoort\.nl'];
     const emailRegexPattern = new RegExp(`^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(${schoolDomainsRegex.join('|')})$`);
     
     if(!email.match(emailRegexPattern)) {
@@ -43,7 +43,7 @@ const user = await User.create({
     active: false,
 });
 
-createAndSendMail(user, email) 
+emailController.createAndSendMail(user, email) 
 
 res.redirect('/');
 
@@ -77,6 +77,12 @@ async function login(req,res) {
       return res.status(401).json({
         errorMessage: "Gebruikersnaam of wachtwoord incorrect",
       });
+
+      if (!userInDB.active) {
+        return res.status(400).json({
+          errorMessage: "U moet eerst uw email bevestigen",
+        });
+      }
   
     const token = jwt.sign(
       {
@@ -94,33 +100,6 @@ async function login(req,res) {
 
   async function logout(req, res) {
     res.clearCookie("auth-token").redirect('/');
-  }
-
-function createAndSendMail(user, email) {
-  var transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_PASS,
-    }
-  });
-  
-  const emailToken = jwt.sign(
-    {
-      user: user._id,
-    },
-    process.env.EMAIL_SECRET,
-  );
-  
-  const url = `http://localhost:5000/api/confirmation/${emailToken}`;
-  
-  transporter.sendMail({
-    from: 'giveandget@dont-reply.com',
-    to: email,
-    subject: 'Bevestig email',
-    html: `Klik op deze link om je email te verifi&euml;ren: <a href="${url}">${url}</a>`,
-  });
-
   }
 
 module.exports = {
