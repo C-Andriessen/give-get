@@ -3,7 +3,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 
-async function register(req,res) {
+async function register(req, res) {
+    try{
     const {name, email, password, passwordRepeat } = req.body;
 
     if (!name || !email || !password || !passwordRepeat) {
@@ -45,6 +46,14 @@ const user = await User.create({
 createAndSendMail(user, email) 
 
 res.redirect('/');
+
+    } catch(err) {
+      if(err.code = 11000) {
+        return res.status(400).json({
+          errorMessage: "De email die u heeft opgegeven is al in gebruik",
+        });
+      }
+    }
 }
 
 async function login(req,res) {
@@ -101,9 +110,6 @@ function createAndSendMail(user, email) {
       user: user._id,
     },
     process.env.EMAIL_SECRET,
-    {
-      expiresIn: '1d',
-    },
   );
   
   const url = `http://localhost:5000/api/confirmation/${emailToken}`;
