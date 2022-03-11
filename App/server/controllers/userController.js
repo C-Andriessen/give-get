@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Role = require('../models/role');
 const emailController = require('./emailController');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -36,10 +37,13 @@ async function register(req, res) {
 }
 const passwordHash = bcrypt.hashSync(password, await bcrypt.genSalt(10));
 
+const role = await Role.findOne({name: "STUDENT"}).exec();
+
 const user = await User.create({
     name,
     email,
     passwordHash,
+    role: role._id,
     active: false,
 });
 
@@ -48,12 +52,8 @@ emailController.createAndSendMail(user, email)
 res.redirect('/');
 
     } catch(err) {
-      if(err.code = 11000) {
-        return res.status(400).json({
-          errorMessage: "De email die u heeft opgegeven is al in gebruik",
-        });
+        // console.log(err);
       }
-    }
 }
 
 async function login(req,res) {
