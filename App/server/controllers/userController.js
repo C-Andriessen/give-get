@@ -3,6 +3,7 @@ const Role = require('../models/role');
 const emailController = require('./emailController');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { findByIdAndRemove } = require('../models/user');
 
 async function register(req, res) {
     try{
@@ -102,8 +103,14 @@ async function login(req,res) {
     res.clearCookie("auth-token").redirect('/');
   }
 
+  async function deleteSelf(req,res) {
+      await User.findByIdAndDelete(req.user._id);
+      res.clearCookie("auth-token").redirect('/');
+  }
+
 module.exports = {
     register,
     login,
     logout,
+    deleteSelf,
 }
