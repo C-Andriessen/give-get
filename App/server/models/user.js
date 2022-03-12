@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema(
     passwordHash: { type: String, required: true },
     active: {type: Boolean, required: true},
     role: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "role" },
-    post: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "post", default: [] },
+    posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "post" }],
   },
   {
     timestamps: true,
