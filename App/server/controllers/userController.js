@@ -69,7 +69,7 @@ res.redirect('/');
 async function login(req,res) {
     const { email, password } = req.body;
 
-    const filledIn = validation.isFilledIn({email, 'wachtwoord': password})
+    const filledIn = await validation.isFilledIn({email, 'wachtwoord': password})
 
     if (filledIn) {
       return res.status(400).json({
@@ -84,14 +84,14 @@ async function login(req,res) {
         errorMessage: "Gebruikersnaam of wachtwoord incorrect",
       });
   
-    const passwordCorrect = bcrypt.compareSync(password, userInDB.passwordHash);
+    const passwordCorrect = bcrypt.compareSync(password, user.passwordHash);
   
     if (!passwordCorrect)
       return res.status(401).json({
         errorMessage: "Gebruikersnaam of wachtwoord incorrect",
       });
 
-      if (!userInDB.active) {
+      if (!user.active) {
         return res.status(400).json({
           errorMessage: "U moet eerst uw email bevestigen",
         });
@@ -99,7 +99,7 @@ async function login(req,res) {
   
     const token = jwt.sign(
       {
-        id: userInDB._id,
+        id: user._id,
       },
       process.env.JWT_SECRET
     );
