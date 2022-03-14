@@ -3,38 +3,44 @@ const Role = require('../models/role');
 const emailController = require('./emailController');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const validation = require('../middleware/validation');
 
 async function register(req, res) {
     try{
     const {name, email, password, passwordRepeat } = req.body;
 
-    if (!name || !email || !password || !passwordRepeat) {
-      return res.status(400).json({
-        errorMessage: "Vul alsjeblieft alle velden in",
-      });
-    }
-  
-    if (password !== passwordRepeat) {
-      return res.status(400).json({
-        errorMessage: "De wachtwoorden moeten hetzelfde zijn",
-      });
-    }
+      const filledIn = await validation.isFilledIn({'naam': name, email, 'wachtwoord': password, 'wachtwoord bevestigen': passwordRepeat});
 
-    const schoolDomainsRegex = ['noorderpoort\.nl'];
-    const emailRegexPattern = new RegExp(`^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(${schoolDomainsRegex.join('|')})$`);
-    
-    if(!email.match(emailRegexPattern)) {
-      const schools = ['Noorderpoort'];
-      return res.status(400).json({
-        errorMessage: `Je moet een geldig ${schools.join(', ').replace(/, ([^,]*)$/, ' of $1')} email gebruiken`,
-      });
-    }
-  
-    if (password.length < 6) {
-      return res.status(400).json({
-        errorMessage: "Het wachtwoord moet tenminste 6 karakters lang zijn",
-      });
-}
+      if (filledIn) {
+        return res.status(400).json({
+          errorMessage: filledIn,
+        });
+      }
+
+      const passwordEqual = await validation.passwordEqual(password, passwordRepeat);
+
+      if (passwordEqual) {
+        return res.status(400).json({
+          errorMessage: passwordEqual,
+        });
+      }
+
+      const emailRegex = await validation.emailRegex(email, ["noorderpoort.nl"], ['Noorderpoort'])
+
+      if (emailRegex) {
+        return res.status(400).json({
+          errorMessage: emailRegex,
+        });
+      }
+
+      const passwordLength = await validation.passwordLength(password, 6);
+      
+      if(passwordLength) {
+        return res.status(400).json({
+          errorMessage: passwordLength,
+        });
+      }
+
 const passwordHash = bcrypt.hashSync(password, await bcrypt.genSalt(10));
 
 const role = await Role.findOne({name: "STUDENT"}).exec();
@@ -52,7 +58,6 @@ emailController.createAndSendMail(user, email)
 res.redirect('/');
 
     } catch(err) {
-      console.log(err);
       if(err.code = 11000) {
         return res.status(400).json({
           errorMessage: "De email die u heeft opgegeven is al in gebruik",
@@ -64,26 +69,29 @@ res.redirect('/');
 async function login(req,res) {
     const { email, password } = req.body;
 
-    if (!email || !password)
-      return res.status(401).json({
-        errorMessage: "Vul een geldige gebruikersnaam en wacthwoord in",
+    const filledIn = await validation.isFilledIn({email, 'wachtwoord': password})
+
+    if (filledIn) {
+      return res.status(400).json({
+        errorMessage: filledIn,
       });
+    }
   
-    const userInDB = await User.findOne({ email });
+    const user = await User.findOne({ email });
   
-    if (!userInDB)
+    if (!user)
       return res.status(401).json({
         errorMessage: "Gebruikersnaam of wachtwoord incorrect",
       });
   
-    const passwordCorrect = bcrypt.compareSync(password, userInDB.passwordHash);
+    const passwordCorrect = bcrypt.compareSync(password, user.passwordHash);
   
     if (!passwordCorrect)
       return res.status(401).json({
         errorMessage: "Gebruikersnaam of wachtwoord incorrect",
       });
 
-      if (!userInDB.active) {
+      if (!user.active) {
         return res.status(400).json({
           errorMessage: "U moet eerst uw email bevestigen",
         });
@@ -91,7 +99,7 @@ async function login(req,res) {
   
     const token = jwt.sign(
       {
-        id: userInDB._id,
+        id: user._id,
       },
       process.env.JWT_SECRET
     );
@@ -113,8 +121,8 @@ async function login(req,res) {
   }
 
   async function deleteStudent (req, res) {
-    const auth_user = await User.findOne({_id: req.user._id}).populate('role').exec();
-    
+    const auth_user = await User.findById(req.user._id).populate('role').exec();
+
     switch(auth_user.role.name) {
       case "BEHEERDER":
       case "DOCENT":
