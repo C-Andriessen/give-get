@@ -3,51 +3,54 @@ const Role = require('../models/role');
 const emailController = require('./emailController');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const validation = require('../middleware/validation');
 
 async function register(req, res) {
     try{
     const {name, email, password, passwordRepeat } = req.body;
 
-    if (!name || !email || !password || !passwordRepeat) {
-      return res.status(400).json({
-        errorMessage: "Vul alsjeblieft alle velden in",
-      });
-    }
-  
-    if (password !== passwordRepeat) {
-      return res.status(400).json({
-        errorMessage: "De wachtwoorden moeten hetzelfde zijn",
-      });
-    }
+      let filledIn = await validation.isFilledIn({name, email, password, 'wachtwoord bevestigen': passwordRepeat});
 
-    const schoolDomainsRegex = ['noorderpoort\.nl'];
-    const emailRegexPattern = new RegExp(`^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(${schoolDomainsRegex.join('|')})$`);
+      if (filledIn) {
+        return res.status(400).json({
+          errorMessage: filledIn,
+        });
+      }
+
+//     if (password !== passwordRepeat) {
+//       return res.status(400).json({
+//         errorMessage: "De wachtwoorden moeten hetzelfde zijn",
+//       });
+//     }
+
+//     const schoolDomainsRegex = ['noorderpoort\.nl'];
+//     const emailRegexPattern = new RegExp(`^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(${schoolDomainsRegex.join('|')})$`);
     
-    if(!email.match(emailRegexPattern)) {
-      const schools = ['Noorderpoort'];
-      return res.status(400).json({
-        errorMessage: `Je moet een geldig ${schools.join(', ').replace(/, ([^,]*)$/, ' of $1')} email gebruiken`,
-      });
-    }
+//     if(!email.match(emailRegexPattern)) {
+//       const schools = ['Noorderpoort'];
+//       return res.status(400).json({
+//         errorMessage: `Je moet een geldig ${schools.join(', ').replace(/, ([^,]*)$/, ' of $1')} email gebruiken`,
+//       });
+//     }
   
-    if (password.length < 6) {
-      return res.status(400).json({
-        errorMessage: "Het wachtwoord moet tenminste 6 karakters lang zijn",
-      });
-}
-const passwordHash = bcrypt.hashSync(password, await bcrypt.genSalt(10));
+//     if (password.length < 6) {
+//       return res.status(400).json({
+//         errorMessage: "Het wachtwoord moet tenminste 6 karakters lang zijn",
+//       });
+// }
+// const passwordHash = bcrypt.hashSync(password, await bcrypt.genSalt(10));
 
-const role = await Role.findOne({name: "STUDENT"}).exec();
+// const role = await Role.findOne({name: "STUDENT"}).exec();
 
-const user = await User.create({
-    name,
-    email,
-    passwordHash,
-    role: role._id,
-    active: false,
-});
+// const user = await User.create({
+//     name,
+//     email,
+//     passwordHash,
+//     role: role._id,
+//     active: false,
+// });
 
-emailController.createAndSendMail(user, email) 
+// emailController.createAndSendMail(user, email) 
 
 res.redirect('/');
 
