@@ -1,5 +1,6 @@
 const Post = require('../models/post');
 const validation = require('../middleware/validation');
+const User = require('../models/user');
 
 async function save(req, res) {
     const user = req.user;
@@ -22,7 +23,22 @@ async function save(req, res) {
 }
 
 async function favorite(req, res) {
-    console.log(req.body);
+    const user = req.user;
+    const favorite_posts = user.favorite_posts
+    const postId = req.body._id;
+    
+    if (favorite_posts.includes(postId)) {
+        for (let i = 0; i < favorite_posts.length; i++) {
+            if(favorite_posts[i] == postId) {
+                favorite_posts.splice(i, 1);
+            }
+        }
+    } else {
+        favorite_posts.push(postId);
+    }
+    user.save()
+
+    res.redirect('/')
   }
 
 module.exports = {
