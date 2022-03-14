@@ -117,7 +117,6 @@ async function login(req,res) {
   }
 
   async function deleteSelf(req,res) {
-    
     const user = await User.findById(req.user._id);
     
     for (const post of user.posts) {

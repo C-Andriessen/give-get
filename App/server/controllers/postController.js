@@ -21,6 +21,11 @@ async function save(req, res) {
     res.redirect('/');
 }
 
+async function favorite(req, res) {
+    console.log(req.body);
+  }
+
 module.exports = {
     save,
+    favorite,
 }

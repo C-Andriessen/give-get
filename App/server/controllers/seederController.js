@@ -1,5 +1,6 @@
 const Role = require('../models/role');
 const User = require('../models/user');
+const Post = require('../models/post');
 const bcrypt = require("bcrypt");
 
 async function roleSeeder(req, res) {
@@ -22,7 +23,20 @@ async function userSeeder(req, res) {
     res.end();
 }
 
+async function postSeeder(req, res) {
+    const user = await User.findOne({name: "Student test user"});
+
+    for (let i = 1; i < 6; i++) {
+        const post = await Post.create({subject: `Post ${i}`, content: `Dit is de beschrijving van de post`, user: user._id});
+        user.posts.push(post);
+    }
+    user.save();
+
+    res.end();
+}
+
 module.exports = {
     roleSeeder,
-    userSeeder
+    userSeeder,
+    postSeeder
 };
