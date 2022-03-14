@@ -18,7 +18,16 @@ async function passwordEqual(pass, passRepeat) {
   }
 }
 
+async function emailRegex(email, domainsRegex, schools) {
+    const emailRegexPattern = new RegExp(`^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(${domainsRegex.join('|')})$`);
+
+    if(!email.match(emailRegexPattern)) {
+        return `Je moet een geldig ${schools.join(', ').replace(/, ([^,]*)$/, ' of $1')} email gebruiken`;
+    }
+}
+
 module.exports = {
   isFilledIn,
   passwordEqual,
+  emailRegex,
 };
