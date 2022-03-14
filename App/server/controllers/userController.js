@@ -17,11 +17,13 @@ async function register(req, res) {
         });
       }
 
-//     if (password !== passwordRepeat) {
-//       return res.status(400).json({
-//         errorMessage: "De wachtwoorden moeten hetzelfde zijn",
-//       });
-//     }
+      let passwordEqual = await validation.passwordEqual(password, passwordRepeat);
+
+      if (passwordEqual) {
+        return res.status(400).json({
+          errorMessage: passwordEqual,
+        });
+      }
 
 //     const schoolDomainsRegex = ['noorderpoort\.nl'];
 //     const emailRegexPattern = new RegExp(`^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(${schoolDomainsRegex.join('|')})$`);
