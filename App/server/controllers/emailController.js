@@ -28,7 +28,7 @@ async function confirmEmail (req, res) {
       process.env.EMAIL_SECRET,
     );
     
-    const url = `http://localhost:5000/api/confirmation/${emailToken}`;
+    const url = `http://localhost:5000/api/email/confirmation/${emailToken}`;
     
     transporter.sendMail({
       to: email,
