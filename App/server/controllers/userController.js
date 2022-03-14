@@ -40,7 +40,7 @@ async function register(req, res) {
           errorMessage: passwordLength,
         });
       }
-      
+
 const passwordHash = bcrypt.hashSync(password, await bcrypt.genSalt(10));
 
 const role = await Role.findOne({name: "STUDENT"}).exec();
@@ -69,14 +69,17 @@ res.redirect('/');
 async function login(req,res) {
     const { email, password } = req.body;
 
-    if (!email || !password)
-      return res.status(401).json({
-        errorMessage: "Vul een geldige gebruikersnaam en wacthwoord in",
+    const filledIn = validation.isFilledIn({email, 'wachtwoord': password})
+
+    if (filledIn) {
+      return res.status(400).json({
+        errorMessage: filledIn,
       });
+    }
   
-    const userInDB = await User.findOne({ email });
+    const user = await User.findOne({ email });
   
-    if (!userInDB)
+    if (!user)
       return res.status(401).json({
         errorMessage: "Gebruikersnaam of wachtwoord incorrect",
       });

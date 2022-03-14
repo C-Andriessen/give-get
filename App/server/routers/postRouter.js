@@ -3,6 +3,6 @@ const auth = require('../middleware/auth');
 
 const router = require("express").Router();
 
-router.post('/savePost', auth.verifyUser, postController.savePost);
+router.post('/save', auth, postController.save);
 
 module.exports = router;
