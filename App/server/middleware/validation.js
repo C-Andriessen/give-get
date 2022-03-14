@@ -8,12 +8,12 @@ async function isFilledIn(args) {
     }
   }
   if (fields.length != 0) {
-    return `Vul alsjeblieft ${fields.join(", ")} in`;
+    return `Vul alsjeblieft ${fields.join(", ").replace(/, ([^,]*)$/, ' en $1')} in`;
   }
 }
 
-async function passwordEqual(pass, passRepeat) {
-  if (pass !== passRepeat) {
+async function passwordEqual(password, passwordRepeat) {
+  if (password !== passwordRepeat) {
     return `De wachtwoorden moeten hetzelfde zijn!`;
   }
 }
@@ -26,8 +26,15 @@ async function emailRegex(email, domainsRegex, schools) {
     }
 }
 
+async function passwordLength(password, length) {
+  if(password.length < length) {
+    return `Het wachtwoord moet tenminste ${length} karakters lang zijn`;
+  }
+}
+
 module.exports = {
   isFilledIn,
   passwordEqual,
   emailRegex,
+  passwordLength,
 };

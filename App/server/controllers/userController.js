@@ -9,7 +9,7 @@ async function register(req, res) {
     try{
     const {name, email, password, passwordRepeat } = req.body;
 
-      let filledIn = await validation.isFilledIn({name, email, password, 'wachtwoord bevestigen': passwordRepeat});
+      const filledIn = await validation.isFilledIn({'naam': name, email, 'wachtwoord': password, 'wachtwoord bevestigen': passwordRepeat});
 
       if (filledIn) {
         return res.status(400).json({
@@ -17,45 +17,47 @@ async function register(req, res) {
         });
       }
 
-      let passwordEqual = await validation.passwordEqual(password, passwordRepeat);
+      const passwordEqual = await validation.passwordEqual(password, passwordRepeat);
 
       if (passwordEqual) {
         return res.status(400).json({
           errorMessage: passwordEqual,
         });
       }
-      	
-      let emailRegex = await validation.emailRegex(email, ["noorderpoort.nl"], ['Noorderpoort'])
+
+      const emailRegex = await validation.emailRegex(email, ["noorderpoort.nl"], ['Noorderpoort'])
 
       if (emailRegex) {
         return res.status(400).json({
           errorMessage: emailRegex,
         });
       }
-  
-//     if (password.length < 6) {
-//       return res.status(400).json({
-//         errorMessage: "Het wachtwoord moet tenminste 6 karakters lang zijn",
-//       });
-// }
-// const passwordHash = bcrypt.hashSync(password, await bcrypt.genSalt(10));
 
-// const role = await Role.findOne({name: "STUDENT"}).exec();
+      const passwordLength = await validation.passwordLength(password, 6);
+      
+      if(passwordLength) {
+        return res.status(400).json({
+          errorMessage: passwordLength,
+        });
+      }
+      
+const passwordHash = bcrypt.hashSync(password, await bcrypt.genSalt(10));
 
-// const user = await User.create({
-//     name,
-//     email,
-//     passwordHash,
-//     role: role._id,
-//     active: false,
-// });
+const role = await Role.findOne({name: "STUDENT"}).exec();
 
-// emailController.createAndSendMail(user, email) 
+const user = await User.create({
+    name,
+    email,
+    passwordHash,
+    role: role._id,
+    active: false,
+});
+
+emailController.createAndSendMail(user, email) 
 
 res.redirect('/');
 
     } catch(err) {
-      console.log(err);
       if(err.code = 11000) {
         return res.status(400).json({
           errorMessage: "De email die u heeft opgegeven is al in gebruik",
