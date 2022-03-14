@@ -19,7 +19,7 @@ app.use(require("morgan")("tiny"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use("/api", require("./routers/userRouter"));
-app.use("/api", require("./routers/emailRouter"));
-app.use("/api", require("./routers/postRouter"));
+app.use("/api/user", require("./routers/userRouter"));
+app.use("/api/email", require("./routers/emailRouter"));
+app.use("/api/post", require("./routers/postRouter"));
 app.use("/seeder", require("./routers/seederRouter"));
