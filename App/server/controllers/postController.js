@@ -1,6 +1,5 @@
 const Post = require('../models/post');
 const validation = require('../middleware/validation');
-const User = require('../models/user');
 
 async function save(req, res) {
     const user = req.user;
