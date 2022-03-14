@@ -121,8 +121,8 @@ async function login(req,res) {
   }
 
   async function deleteStudent (req, res) {
-    const auth_user = await User.findOne({_id: req.user._id}).populate('role').exec();
-    
+    const auth_user = await User.findById(req.user._id).populate('role').exec();
+
     switch(auth_user.role.name) {
       case "BEHEERDER":
       case "DOCENT":
