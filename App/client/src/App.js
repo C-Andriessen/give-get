@@ -1,7 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import axios from "axios";
 
 function App() {
+  const [apiResponse, getApiResponse] = useState("");
+
+  axios.get("localhost:5000/testapi").then((res) => {
+    const response = res.data;
+    getApiResponse(response);
+  });
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +27,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <p className="App-intro">{apiResponse}</p>
     </div>
   );
 }
