@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Role = require('../models/role');
+const Post = require('../models/post');
 const emailController = require('./emailController');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -116,16 +117,26 @@ async function login(req,res) {
   }
 
   async function deleteSelf(req,res) {
-      await User.findByIdAndDelete(req.user._id);
+    
+    const user = await User.findById(req.user._id);
+    
+    for (const post of user.posts) {
+      await Post.findByIdAndDelete(post);
+    }
+    await User.findByIdAndDelete(req.user._id);
       res.clearCookie("auth-token").redirect('/');
   }
 
   async function deleteStudent (req, res) {
     const auth_user = await User.findById(req.user._id).populate('role').exec();
+    const target_user = await User.findById(req.body._id);
 
     switch(auth_user.role.name) {
       case "BEHEERDER":
       case "DOCENT":
+        for (const post of target_user.posts) {
+          await Post.findByIdAndDelete(post);
+        }
         await User.findByIdAndDelete(req.body._id).exec();
         res.redirect('/');
         break;
