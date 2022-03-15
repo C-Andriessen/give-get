@@ -2,6 +2,12 @@ const Post = require('../models/post');
 const User = require('../models/user');
 const validation = require('../middleware/validation');
 
+async function show (req, res) {
+    const post = await Post.findById(req.params.post).populate('user').exec();
+    console.log(post);
+    res.end();
+}
+
 async function save(req, res) {
     const user = req.user;
     const { subject, content } = req.body;
@@ -47,4 +53,5 @@ async function favorite(req, res) {
 module.exports = {
     save,
     favorite,
+    show,
 }
