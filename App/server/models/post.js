@@ -4,7 +4,7 @@ const postSchema = new mongoose.Schema(
   {
     subject: {type: String, required:true},
     content: {type: String, required: true},
-    shortlink: {type: String},
+    shortUrlCode: {type: String},
     user: {type: mongoose.Schema.Types.ObjectId, required: true, ref: "user"}
   },
   {
