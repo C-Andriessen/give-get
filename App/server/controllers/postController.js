@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const User = require('../models/user');
 const validation = require('../middleware/validation');
 
 async function save(req, res) {
@@ -15,27 +16,30 @@ async function save(req, res) {
 
     const post = await Post.create({subject: subject, content: content, user: user._id});
 
-    user.posts.push(post);
-    user.save();
+    await User.updateOne({ _id: user._id }, { $push: {
+        posts: [{_id: post._id}],
+        }, 
+    });
+    
 
     res.redirect('/');
 }
 
 async function favorite(req, res) {
     const user = req.user;
-    const favorite_posts = user.favorite_posts
     const postId = req.body._id;
     
-    if (favorite_posts.includes(postId)) {
-        for (let i = 0; i < favorite_posts.length; i++) {
-            if(favorite_posts[i] == postId) {
-                favorite_posts.splice(i, 1);
-            }
-        }
+    if (user.favorite_posts.includes(postId)) {
+        await User.updateOne({ _id: user._id }, { $pullAll: {
+            favorite_posts: [{_id: postId}],
+        }, 
+    });
     } else {
-        favorite_posts.push(postId);
+        await User.updateOne({ _id: user._id}, { $push: {
+            favorite_posts: [{_id: postId}],
+        },
+    });
     }
-    user.save()
 
     res.redirect('/')
   }
