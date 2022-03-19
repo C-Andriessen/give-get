@@ -3,10 +3,14 @@ const User = require('../models/user');
 const validation = require('../middleware/validation');
 const shortlink = require('shortlink');
 
+async function showAll (req, res) {
+    const posts = await Post.find();
+    res.send(posts);
+}
+
 async function show (req, res) {
     const post = await Post.findById(req.params.post).populate('user').exec();
-    console.log(post);
-    res.end();
+    res.send(post);
 }
 
 async function showShort (req, res) {
@@ -65,4 +69,5 @@ module.exports = {
     favorite,
     show,
     showShort,
+    showAll,
 }

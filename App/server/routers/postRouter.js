@@ -3,6 +3,7 @@ const auth = require('../middleware/auth');
 
 const router = require("express").Router();
 
+router.get('/', postController.showAll);
 router.get('/:post', postController.show);
 router.get('/short/:shortUrlCode', postController.showShort);
 router.post('/save', auth, postController.save);
