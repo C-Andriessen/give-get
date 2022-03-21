@@ -49,10 +49,10 @@ const user = await User.create({
 
 emailController.createAndSendMail(user, email) 
 
-res.redirect('/');
+res.redirect('http://localhost:3000/');
 
     } catch(err) {
-      console.log(err);
+      console.log(err.code);
       if(err.code = 11000) {
         return res.status(400).json({
           errorMessage: "De email die u heeft opgegeven is al in gebruik",
