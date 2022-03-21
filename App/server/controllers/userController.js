@@ -100,7 +100,7 @@ async function login(req,res) {
       .cookie("auth-token", token, {
         httpOnly: true,
       })
-      .redirect('/');
+      .redirect('http://localhost:3000/');
   }
 
   async function logout(req, res) {
