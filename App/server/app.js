@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 require("dotenv").config();
 
@@ -13,6 +14,7 @@ mongoose.connect(process.env.MONGODB_CONNECT, (err) => {
   console.log("Connected to the db");
 });
 
+app.use(cors());
 app.use(cookieParser());
 app.use(require("morgan")("tiny"));
 app.use(express.urlencoded({ extended: false }));
