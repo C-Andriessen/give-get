@@ -56,9 +56,10 @@ const user = await User.create({
 
 emailController.createAndSendMail(user, email) 
 
-res.redirect('/');
+res.redirect('http://localhost:3000/');
 
     } catch(err) {
+      console.log(err.code);
       if(err.code = 11000) {
         return res.status(400).json({
           errorMessage: "De email die u heeft opgegeven is al in gebruik",
@@ -109,47 +110,45 @@ async function login(req,res) {
       .cookie("auth-token", token, {
         httpOnly: true,
       })
-      .redirect('/');
+      .redirect('http://localhost:3000/');
   }
 
   async function logout(req, res) {
     res.clearCookie("auth-token").redirect('/');
   }
 
-  async function deleteSelf(req,res) {
-    const user = await User.findById(req.user._id);
+  async function deleteUser (req,res) {
+    const user = await User.findById(req.user._id).populate('role').exec();
+
+    if (Object.keys(req.body).length === 0) {
+      for (const post of user.posts) {
+        await Post.findByIdAndDelete(post);
+      }
+      await User.findByIdAndDelete(req.user._id);
+        res.clearCookie("auth-token").redirect('/');
+    } else {
+      const target_user = await User.findById(req.body._id);
+      switch(user.role.name) {
+        case "BEHEERDER":
+        case "DOCENT":
+          for (const post of target_user.posts) {
+            await Post.findByIdAndDelete(post);
+          }
+          await User.findByIdAndDelete(req.body._id).exec();
+          res.redirect('/');
+          break;
+        case "STUDENT":
+          return res.status(400).json({
+            errorMessage: `Je hebt geen rechten om dit uit te voeren`,
+          });
+      }
+    }
     
-    for (const post of user.posts) {
-      await Post.findByIdAndDelete(post);
-    }
-    await User.findByIdAndDelete(req.user._id);
-      res.clearCookie("auth-token").redirect('/');
-  }
-
-  async function deleteStudent (req, res) {
-    const auth_user = await User.findById(req.user._id).populate('role').exec();
-    const target_user = await User.findById(req.body._id);
-
-    switch(auth_user.role.name) {
-      case "BEHEERDER":
-      case "DOCENT":
-        for (const post of target_user.posts) {
-          await Post.findByIdAndDelete(post);
-        }
-        await User.findByIdAndDelete(req.body._id).exec();
-        res.redirect('/');
-        break;
-      case "STUDENT":
-        return res.status(400).json({
-          errorMessage: `Je hebt geen rechten om dit uit te voeren`,
-        });
-    }
   }
 
 module.exports = {
     register,
     login,
     logout,
-    deleteSelf,
-    deleteStudent,
+    deleteUser,
 }
