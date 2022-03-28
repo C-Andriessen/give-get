@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema(
     role: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "role" },
     active: {type: Boolean, required: true},
     posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "post" }],
+    favorite_posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "post"}],
   },
   {
     timestamps: true,
