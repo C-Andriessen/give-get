@@ -52,11 +52,19 @@ async function favorite(req, res) {
     if (user.favorite_posts.includes(postId)) {
         await User.updateOne({ _id: user._id }, { $pullAll: {
             favorite_posts: [{_id: postId}],
-        }, 
+        },
     });
+    await Post.updateOne({ _id: postId}, { $pullAll: {
+        favorite_users: [{_id: user._id}],
+    },
+});
     } else {
         await User.updateOne({ _id: user._id}, { $push: {
             favorite_posts: [{_id: postId}],
+        },
+    });
+        await Post.updateOne({ _id: postId}, { $push: {
+            favorite_users: [{_id: user._id}],
         },
     });
     }

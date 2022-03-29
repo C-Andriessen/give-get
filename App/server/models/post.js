@@ -6,7 +6,7 @@ const postSchema = new mongoose.Schema(
     content: {type: String, required: true},
     shortUrlCode: {type: String},
     user: {type: mongoose.Schema.Types.ObjectId, required: true, ref: "user"},
-    favoriteUser: {type: mongoose.Schema.Types.ObjectId, required: true, ref: "user"}
+    favorite_users: [{type: mongoose.Schema.Types.ObjectId, required: true, ref: "user"}]
   },
   {
     timestamps: true,
