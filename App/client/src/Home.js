@@ -7,7 +7,6 @@ export default function Home() {
     <>
       <header className="h-[55px] flex items-center justify-between mx-5">
         <h1 className="font-roboto text-baby-barf-red text-2xl">GIVE 'N GET</h1>
-
         <MobileMenu />
       </header>
     </>
@@ -19,7 +18,7 @@ function MobileMenu() {
 
   return (
     <>
-      <MenuIcon className="h-[35px]" onClick={() => setOpen(true)} />
+      <MenuIcon className="h-[35px] text-baby-barf-red" onClick={() => setOpen(true)} />
 
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -64,24 +63,18 @@ function MobileMenu() {
                           onClick={() => setOpen(false)}
                         >
                           <span className="sr-only">Close panel</span>
-                          <XIcon className="h-6 w-6" aria-hidden="true" />
+                          <XIcon className="h-6 w-6 text-baby-barf-red" aria-hidden="true" />
                         </button>
                       </div>
                     </Transition.Child>
-                    <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
-                      <div className="px-4 sm:px-6">
-                        <Dialog.Title className="text-lg font-medium text-gray-900">
-                          {" "}
-                          Panel title{" "}
-                        </Dialog.Title>
-                      </div>
+                    <div className="flex h-full flex-col overflow-y-scroll bg-baby-barf-green-200 py-6 shadow-xl">
                       <div className="relative mt-6 flex-1 px-4 sm:px-6">
                         {/* Replace with your content */}
-                        <div className="absolute inset-0 px-4 sm:px-6">
-                          <div
-                            className="h-full border-2 border-dashed border-gray-200"
-                            aria-hidden="true"
-                          />
+                        <div className="absolute inset-0 px-4 sm:px-6 text-center text-4xl text-baby-barf-red">
+                          <h1 className="my-4">Info</h1>
+                          <h1 className="my-4">Actueel</h1>
+                          <h1 className="my-4">Producten</h1>
+                          <h1 className="my-4">Contact</h1>
                         </div>
                         {/* /End replace */}
                       </div>

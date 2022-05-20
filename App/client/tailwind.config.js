@@ -11,7 +11,10 @@ module.exports = {
     colors: {
       "white": "#fff",
       "black": "#000",
-      "baby-barf-green": "#CFDAC1",
+      "baby-barf-green": {
+        100: "#CFDAC1",
+        200: "#9FAA91",
+      },
       "baby-barf-yellow":"#F1CE15",
       "baby-barf-orange":"#F2A211",
       "baby-barf-red":"#F11E1D",
