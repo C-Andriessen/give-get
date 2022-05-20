@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import Home from "./Home";
 import Register from "./register";
 import Login from "./login";
+import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>
