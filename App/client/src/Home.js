@@ -1,12 +1,13 @@
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon, MenuIcon } from "@heroicons/react/outline";
+import logoFull from "./img/svg/LogoFull.svg";
 
 export default function Home() {
   return (
     <>
       <header className="h-[55px] flex items-center justify-between mx-5">
-        <h1 className="font-roboto text-baby-barf-red text-2xl">GIVE 'N GET</h1>
+        <img src={logoFull} alt="Logo" className="h-[40px]"/>
         <MobileMenu />
       </header>
     </>
