@@ -13,13 +13,13 @@ export default function Home() {
       </header>
 
       {/* Welcome section */}
-      <section className="grid grid-flow-row auto-rows-max">
-        <div>
-          <img src={imgPuzzle} alt="Building a puzzle together" />
+      <section className="grid grid-flow-row auto-rows-max text-center">
+        <div className="mb-1">
+          <img src={imgPuzzle} className="w-3/4 mx-auto" alt="Building a puzzle together" />
         </div>
-        <div className="flex items-center">
-          <h1>WELKOM BIJ</h1>
-          <img src={imgLogoFull} className="ml-5" alt="Logo" />
+        <div className="flex items-center justify-center">
+          <h1 className="font-futura text-white font-bold text-[26.5px]">WELKOM BIJ</h1>
+          <img src={imgLogoFull} className="ml-5 h-[55px]" alt="Logo" />
         </div>
         <div>
           <p>De plek voor studenten, door studenten.</p>
@@ -92,7 +92,7 @@ function MobileMenu() {
                     <div className="flex h-full flex-col overflow-y-scroll bg-baby-barf-green-200 py-6 shadow-xl">
                       <div className="relative mt-6 flex-1 px-4 sm:px-6">
                         {/* Replace with your content */}
-                        <div className="absolute inset-0 px-4 sm:px-6 text-center text-4xl text-baby-barf-red">
+                        <div className="absolute inset-0 px-4 sm:px-6 text-center text-4xl font-roboto">
                           <h1 className="my-4">Info</h1>
                           <h1 className="my-4">Actueel</h1>
                           <h1 className="my-4">Producten</h1>

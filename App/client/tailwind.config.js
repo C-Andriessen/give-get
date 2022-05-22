@@ -1,26 +1,23 @@
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {
-      fontFamily:{
-        "roboto": ["Roboto", "sans-serif"],
-        "futura": ["futura-pt", "sans-serif"],
-      },
-    },
+    extend: {},
     colors: {
-      "white": "#fff",
-      "black": "#000",
+      white: "#fff",
+      black: "#000",
       "baby-barf-green": {
         100: "#CFDAC1",
         200: "#9FAA91",
       },
-      "baby-barf-yellow":"#F1CE15",
-      "baby-barf-orange":"#F2A211",
-      "baby-barf-red":"#F11E1D",
-      "baby-barf-pink":"#F15352",
+      "baby-barf-yellow": "#F1CE15",
+      "baby-barf-orange": "#F2A211",
+      "baby-barf-red": "#F11E1D",
+      "baby-barf-pink": "#F15352",
+    },
+    fontFamily: {
+      roboto: ["Roboto", "sans-serif"],
+      futura: ["futura-pt", "sans-serif"],
     },
   },
   plugins: [],
-}
+};
