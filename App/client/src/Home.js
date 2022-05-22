@@ -22,7 +22,7 @@ export default function Home() {
           <img src={imgLogoFull} className="ml-5 h-[55px]" alt="Logo" />
         </div>
         <div>
-          <p>De plek voor studenten, door studenten.</p>
+          <p className="font-roboto text-s">De plek voor studenten, door studenten.</p>
         </div>
       </section>
     </>
