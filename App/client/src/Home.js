@@ -1,15 +1,30 @@
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon, MenuIcon } from "@heroicons/react/outline";
-import logoFull from "./img/svg/LogoFull.svg";
+import imgLogoFull from "./img/svg/LogoFull.svg";
+import imgPuzzle from "./img/svg/Puzzle.svg";
 
 export default function Home() {
   return (
     <>
       <header className="h-[55px] flex items-center justify-between mx-5">
-        <img src={logoFull} alt="Logo" className="h-[40px]"/>
+        <img src={imgLogoFull} alt="Logo" className="h-[40px]" />
         <MobileMenu />
       </header>
+
+      {/* Welcome section */}
+      <section className="grid grid-flow-row auto-rows-max">
+        <div>
+          <img src={imgPuzzle} alt="Building a puzzle together" />
+        </div>
+        <div className="flex items-center">
+          <h1>WELKOM BIJ</h1>
+          <img src={imgLogoFull} className="ml-5" alt="Logo" />
+        </div>
+        <div>
+          <p>De plek voor studenten, door studenten.</p>
+        </div>
+      </section>
     </>
   );
 }
@@ -19,7 +34,10 @@ function MobileMenu() {
 
   return (
     <>
-      <MenuIcon className="h-[35px] text-baby-barf-red" onClick={() => setOpen(true)} />
+      <MenuIcon
+        className="h-[35px] text-baby-barf-red"
+        onClick={() => setOpen(true)}
+      />
 
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -64,7 +82,10 @@ function MobileMenu() {
                           onClick={() => setOpen(false)}
                         >
                           <span className="sr-only">Close panel</span>
-                          <XIcon className="h-6 w-6 text-baby-barf-red" aria-hidden="true" />
+                          <XIcon
+                            className="h-6 w-6 text-baby-barf-red"
+                            aria-hidden="true"
+                          />
                         </button>
                       </div>
                     </Transition.Child>
