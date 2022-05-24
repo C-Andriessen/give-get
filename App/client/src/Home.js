@@ -1,5 +1,4 @@
-
-
+import Header from "./layout/Header";
 import Feed from "./feed";
 import ButtonPrimary from "./common/ButtonPrimary";
 
@@ -9,10 +8,7 @@ import imgPuzzle from "./img/svg/Puzzle.svg";
 export default function Home() {
   return (
     <>
-      <header className="h-[55px] flex items-center justify-between mx-5">
-        <img src={imgLogoFull} alt="Logo" className="h-[40px]" />
-        <MobileMenu />
-      </header>
+      <Header />
 
       {/* Welcome section */}
       <section className="grid grid-flow-row auto-rows-max text-center">
@@ -38,7 +34,7 @@ export default function Home() {
 
       {/* Trending section */}
       <section className="grid auto-rows-max text-center place-items-center">
-        <h2 className="font-futura font-bold text-xl mt-[80px] mb-[30px] text-center">
+        <h2 className="font-futura font-bold text-xl mt-[65px] mb-[30px] text-center">
           ACTUEEL
         </h2>
         <Feed />
