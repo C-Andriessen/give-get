@@ -4,6 +4,7 @@ import ButtonPrimary from "./common/ButtonPrimary";
 
 import imgLogoFull from "./img/svg/LogoFull.svg";
 import imgPuzzle from "./img/svg/Puzzle.svg";
+import imgHands from "./img/Hands.png";
 
 export default function Home() {
   return (
@@ -39,6 +40,30 @@ export default function Home() {
         </h2>
         <Feed />
         <ButtonPrimary link="#" text="BEKIJK ALLES" />
+      </section>
+
+      {/* Hero Section */}
+      <section className="mt-[50px]">
+        <div className="relative">
+          <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100" />
+          <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div className="relative shadow-xl sm:rounded-2xl sm:overflow-hidden">
+              <div className="absolute inset-0">
+                <img
+                  className="h-full w-full object-cover mix-blend-soft-light"
+                  src={imgHands}
+                  alt="Reaching Hands"
+                />
+                <div className="absolute inset-0 bg-indigo-700 mix-blend-multiply" />
+              </div>
+              <div className="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
+                <h1 className="text-center tracking-tight">
+                  <span className="block text-white text-3xl font-futura font-bold">"THE MORE WE SHARE THE MORE WE HAVE"</span>
+                </h1>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </>
   );
