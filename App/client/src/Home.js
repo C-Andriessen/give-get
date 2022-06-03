@@ -56,18 +56,18 @@ export default function Home() {
         <div className="mb-1">
           <img
             src={imgPuzzle}
-            className="w-3/4 mx-auto"
+            className="w-3/4 sm:w-4/5 mx-auto"
             alt="Building a puzzle together"
           />
         </div>
         <div className="flex items-center justify-center">
-          <h1 className="font-futura text-white font-bold text-[26.5px]">
+          <h1 className="font-futura text-white font-bold text-[26.5px] sm:text-[30px]">
             WELKOM BIJ
           </h1>
           <img src={imgLogoFull} className="ml-5 h-[55px]" alt="Logo" />
         </div>
         <div>
-          <p className="font-roboto text-s">
+          <p className="font-roboto text-s sm:text-lg">
             De plek voor studenten, door studenten.
           </p>
         </div>
@@ -75,7 +75,7 @@ export default function Home() {
 
       {/* Trending section */}
       <section className="grid auto-rows-max text-center place-items-center">
-        <h2 className="font-futura font-bold text-xl mt-[65px] mb-[30px] text-center">
+        <h2 className="font-futura font-bold text-xl mt-[65px] mb-[30px] text-center md:text-3xl">
           ACTUEEL
         </h2>
         <Feed />
@@ -83,11 +83,11 @@ export default function Home() {
       </section>
 
       {/* Hero Section */}
-      <section className="mt-[50px] mb-[30px]">
+      <section className="my-[50px]">
         <div className="relative">
           <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100" />
-          <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div className="relative shadow-xl sm:rounded-2xl sm:overflow-hidden">
+          <div className="max-w-7xl mx-auto">
+            <div className="relative sm:overflow-hidden">
               <div className="absolute inset-0">
                 <img
                   className="h-full w-full object-cover mix-blend-soft-light"
@@ -98,7 +98,7 @@ export default function Home() {
               </div>
               <div className="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
                 <h1 className="text-center tracking-tight">
-                  <span className="block text-white text-3xl font-futura font-bold">
+                  <span className="block text-white text-3xl sm:text-5xl font-futura font-bold">
                     "THE MORE WE SHARE THE MORE WE HAVE"
                   </span>
                 </h1>
@@ -110,10 +110,10 @@ export default function Home() {
 
       {/* Pricing Section */}
       <section className="grid grid-flow-row auto-rows-max text-center place-items-center">
-        <h2 className="font-roboto font-bold text-[20px]">
+        <h2 className="font-roboto font-bold text-[20px] md:text-2xl">
           OOK EEN MUUR VOOR UW BEDRIJF?
         </h2>
-        <h3 className="font-roboto font-bold text-baby-barf-pink text-lg">
+        <h3 className="font-roboto font-bold text-baby-barf-pink text-lg md:text-xl">
           KIES EEN PLAND DAT ER BIJ PAST
         </h3>
 
@@ -125,10 +125,10 @@ export default function Home() {
                 className="shadow-sm divide-y divide-gray-200"
               >
                 <div className={"p-6 text-white rounded-t-xl " + tier.color}>
-                  <h2 className="text-lg leading-6 font-bold font-roboto">
+                  <h2 className="text-lg leading-6 font-bold font-roboto md:text-xl">
                     {tier.name}
                   </h2>
-                  <p className="mt-4 text-sm text-gray-500">
+                  <p className="mt-4 text-sm text-gray-500 md:text-base">
                     {tier.description}
                   </p>
                   <p className="mt-8">
@@ -147,7 +147,7 @@ export default function Home() {
                   </a>
                 </div>
                 <div className="pt-6 pb-8 px-6 bg-white">
-                  <h3 className="text-xs font-medium text-gray-900 tracking-wide uppercase">
+                  <h3 className="text-xs font-medium text-gray-900 tracking-wide uppercase md:text-sm">
                     Wat je kunt verwachten
                   </h3>
                   <ul className="mt-6 space-y-4">

@@ -8,7 +8,7 @@ export default function MobileMenu() {
   return (
     <>
       <MenuIcon
-        className="h-[35px] text-baby-barf-red"
+        className="h-[35px] sm:h-[40px] text-baby-barf-red hover:cursor-pointer"
         onClick={() => setOpen(true)}
       />
 
