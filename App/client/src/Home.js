@@ -45,11 +45,11 @@ export default function Home() {
       <Header />
 
       {/* Welcome section */}
-      <section className="grid grid-flow-row auto-rows-max text-center">
-        <div className="mb-1">
+      <section className="grid grid-flow-row auto-rows-max text-center xl:h-[90vh]">
+        <div className="mb-1 xl:mb-0">
           <img
             src={imgPuzzle}
-            className="w-3/4 sm:w-4/5 mx-auto"
+            className="w-3/4 sm:w-4/5 mx-auto 1xl:w-[1000px] 2xl:w-[1050px] 3xl:w-[1100px]"
             alt="Building a puzzle together"
           />
         </div>
@@ -72,7 +72,7 @@ export default function Home() {
 
       {/* Trending section */}
       <section className="grid auto-rows-max text-center place-items-center">
-        <h2 className="font-futura font-bold text-xl mt-[65px] mb-[30px] text-center md:text-3xl">
+        <h2 className="font-futura font-bold text-xl mt-[65px] mb-[30px] text-center md:text-3xl xl:mt-0 2xl:mt-10">
           ACTUEEL
         </h2>
         <Feed />
@@ -83,7 +83,7 @@ export default function Home() {
       <section className="my-[50px]">
         <div className="relative">
           <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100" />
-          <div className="max-w-7xl mx-auto">
+          <div className="mx-auto">
             <div className="relative sm:overflow-hidden">
               <div className="absolute inset-0">
                 <img
