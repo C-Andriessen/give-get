@@ -2,8 +2,12 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
-      spacing:{
-        "card": "130px",
+      spacing: {
+        card: "130px",
+      },
+      screens: {
+        "1xl": "1450px",
+        "3xl": "1920px",
       },
     },
     colors: {
