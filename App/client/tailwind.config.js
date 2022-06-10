@@ -1,7 +1,11 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      spacing:{
+        "card": "130px",
+      },
+    },
     colors: {
       white: "#fff",
       black: "#000",

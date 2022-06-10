@@ -16,10 +16,7 @@ export default function Home() {
       color: "bg-baby-barf-red",
       priceMonthly: "GRATIS",
       description: "Basis plan met gelimiteerde functionaliteiten.",
-      features: [
-        "1 Muur",
-        "Maximaal 16 oproepen",
-      ],
+      features: ["1 Muur", "Maximaal 16 oproepen"],
     },
     {
       name: "LITE",
@@ -27,11 +24,7 @@ export default function Home() {
       color: "bg-baby-barf-orange",
       priceMonthly: 4.99,
       description: "Geef je bedrijf een betere ervaring met ons Lite plan.",
-      features: [
-        "1 Muur",
-        "Onbeperkt oproepen",
-        "Toevoegen van een foto",
-      ],
+      features: ["1 Muur", "Onbeperkt oproepen", "Toevoegen van een foto"],
     },
     {
       name: "PREMIUM",
@@ -64,7 +57,11 @@ export default function Home() {
           <h1 className="font-futura text-white font-bold text-[26.5px] sm:text-[30px] lg:text-5xl">
             WELKOM BIJ
           </h1>
-          <img src={imgLogoFull} className="ml-5 h-[55px] lg:h-[90px]" alt="Logo" />
+          <img
+            src={imgLogoFull}
+            className="ml-5 h-[55px] lg:h-[90px]"
+            alt="Logo"
+          />
         </div>
         <div>
           <p className="font-roboto text-s sm:text-lg lg:text-xl">
@@ -110,10 +107,10 @@ export default function Home() {
 
       {/* Pricing Section */}
       <section className="grid grid-flow-row auto-rows-max text-center place-items-center">
-        <h2 className="font-roboto font-bold text-[20px] md:text-2xl lg:text-3xl">
+        <h2 className="font-roboto font-bold text-[20px] md:text-2xl lg:text-3xl xl:text-4xl">
           OOK EEN MUUR VOOR UW BEDRIJF?
         </h2>
-        <h3 className="font-roboto font-bold text-baby-barf-pink text-lg md:text-xl lg:text-2xl">
+        <h3 className="font-roboto font-bold text-baby-barf-pink text-lg md:text-xl lg:text-2xl xl:text-3xl">
           KIES EEN PLAN DAT ER BIJ PAST
         </h3>
 
@@ -157,7 +154,9 @@ export default function Home() {
                           className="flex-shrink-0 h-5 w-5 text-green-500"
                           aria-hidden="true"
                         />
-                        <span className="text-sm text-gray-500">{feature}</span>
+                        <span className="text-sm text-gray-500 lg:text-base">
+                          {feature}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -169,9 +168,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="h-[150px] bg-black mt-10">
-
-      </footer>
+      <footer className="h-[150px] bg-black mt-10"></footer>
     </>
   );
 }
