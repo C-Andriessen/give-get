@@ -27,5 +27,5 @@ module.exports = {
       futura: ["futura-pt", "sans-serif"],
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };

@@ -4,16 +4,11 @@ import DesktopMenu from "./DesktopMenu";
 import imgLogoFull from "../img/svg/LogoFull.svg";
 
 import {
-  CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  UsersIcon,
   InformationCircleIcon,
   AnnotationIcon,
   ShoppingBagIcon,
   ChatIcon,
+  UserIcon,
 } from "@heroicons/react/outline";
 
 const nav = [
@@ -21,6 +16,7 @@ const nav = [
   { name: "Actueel", href: "#", icon: AnnotationIcon },
   { name: "Producten", href: "#", icon: ShoppingBagIcon },
   { name: "Contact", href: "#", icon: ChatIcon },
+  { name: "Login", href: "/login", icon: UserIcon },
 ];
 
 export default function Header() {

@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Home from "./Home";
 import Register from "./register";
-import Login from "./login";
+import Login from "./Login";
 import "./index.css";
 
 ReactDOM.render(
