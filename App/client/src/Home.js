@@ -7,6 +7,7 @@ import imgHands from "./img/Hands.png";
 import Pricing from "./components/Pricing";
 import HomeHero from "./components/HomeHero";
 import { ReactComponent as YourSvg } from "./img/svg/LogoN.svg";
+import Footer from "./layout/Footer";
 
 export default function Home() {
   return (
@@ -67,9 +68,7 @@ export default function Home() {
         </div>
       </section>
       <Pricing />
-
-      {/* Footer */}
-      <footer className="h-[150px] bg-black mt-10"></footer>
+      <Footer />
     </>
   );
 }
