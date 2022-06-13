@@ -1,11 +1,15 @@
-export default function DesktopMenu(props) {
+import { Link } from "react-router-dom";
 
+export default function DesktopMenu(props) {
   return (
     <div className={props.classes}>
-      <h1>Info</h1>
-      <h1>Actueel</h1>
-      <h1>Producten</h1>
-      <h1>Contact</h1>
+      {props.navigation.map((item, i) => {
+        return (
+          <Link to={item.href} key={i}>
+            {item.name}
+          </Link>
+        );
+      })}
     </div>
   );
 }

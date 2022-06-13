@@ -1,6 +1,11 @@
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon, MenuIcon } from "@heroicons/react/outline";
+import imgLogoFull from "../img/svg/LogoFull.svg";
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 
 export default function MobileMenu(props) {
   const [open, setOpen] = useState(false);
@@ -62,16 +67,45 @@ export default function MobileMenu(props) {
                         </button>
                       </div>
                     </Transition.Child>
-                    <div className="flex flex-col h-full py-6 overflow-y-scroll shadow-xl bg-baby-barf-green-200">
-                      <div className="relative flex-1 px-4 mt-6 sm:px-6">
-                        {/* Replace with your content */}
-                        <div className="absolute inset-0 px-4 text-4xl text-center sm:px-6 font-roboto">
-                          <h1 className="my-4">Info</h1>
-                          <h1 className="my-4">Actueel</h1>
-                          <h1 className="my-4">Producten</h1>
-                          <h1 className="my-4">Contact</h1>
-                        </div>
-                        {/* /End replace */}
+                    <div className="flex flex-col flex-grow border-r border-gray-200 pt-5 pb-4 bg-baby-barf-green-200 overflow-y-auto h-screen">
+                      <div className="flex items-center flex-shrink-0 px-4">
+                        <img
+                          className="h-10 w-auto"
+                          src={imgLogoFull}
+                          alt="Give and get"
+                        />
+                      </div>
+                      <div className="mt-5 flex-grow flex flex-col">
+                        <nav
+                          className="flex-1 px-2 space-y-8 bg-baby-barf-green-200"
+                          aria-label="Sidebar"
+                        >
+                          <div className="space-y-1">
+                            {props.navigation.map((item) => (
+                              <a
+                                key={item.name}
+                                href={item.href}
+                                className={classNames(
+                                  item.current
+                                    ? "bg-gray-100 text-gray-900"
+                                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                                  "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                                )}
+                              >
+                                <item.icon
+                                  className={classNames(
+                                    item.current
+                                      ? "text-gray-500"
+                                      : "text-gray-400 group-hover:text-gray-500",
+                                    "mr-3 flex-shrink-0 h-6 w-6"
+                                  )}
+                                  aria-hidden="true"
+                                />
+                                {item.name}
+                              </a>
+                            ))}
+                          </div>
+                        </nav>
                       </div>
                     </div>
                   </Dialog.Panel>
