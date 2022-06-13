@@ -10,6 +10,7 @@ import {
   ChatIcon,
   UserIcon,
 } from "@heroicons/react/outline";
+import { Link } from "react-router-dom";
 
 const nav = [
   { name: "Info", href: "#", icon: InformationCircleIcon },
@@ -22,7 +23,9 @@ const nav = [
 export default function Header() {
   return (
     <header className="h-[55px] sm:h-[75px] lg:h-[95px] flex items-center justify-between mx-5 sm:mx-20">
-      <img src={imgLogoFull} alt="Logo" className="h-[40px] sm:h-[60px]" />
+      <Link to="/">
+        <img src={imgLogoFull} alt="Logo" className="h-[40px] sm:h-[60px]" />
+      </Link>
       <MobileMenu navigation={nav} classes="lg:hidden" />
       <DesktopMenu
         navigation={nav}
