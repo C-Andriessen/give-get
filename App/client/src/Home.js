@@ -2,7 +2,6 @@ import Header from "./layout/Header";
 import Feed from "./feed";
 import ButtonPrimary from "./common/ButtonPrimary";
 
-import imgLogoFull from "./img/svg/LogoFull.svg";
 import imgHands from "./img/Hands.png";
 import Pricing from "./components/Pricing";
 import HomeHero from "./components/HomeHero";
