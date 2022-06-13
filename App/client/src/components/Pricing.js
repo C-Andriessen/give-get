@@ -6,7 +6,7 @@ const tiers = [
     href: "#",
     color: "bg-baby-barf-red",
     priceMonthly: "GRATIS",
-    description: "Basis plan met gelimiteerde functionaliteiten.",
+    description: "Kijk wat wij u kunnen bieden met het BASIS plan.",
     features: ["1 Muur", "Maximaal 16 oproepen"],
   },
   {
@@ -14,7 +14,7 @@ const tiers = [
     href: "#",
     color: "bg-baby-barf-orange",
     priceMonthly: 4.99,
-    description: "Geef je bedrijf een betere ervaring met ons Lite plan.",
+    description: "Geef je bedrijf een betere ervaring met ons LITE plan.",
     features: ["1 Muur", "Onbeperkt oproepen", "Toevoegen van een foto"],
   },
   {
