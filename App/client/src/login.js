@@ -1,6 +1,11 @@
 import Header from "./layout/Header";
 import Person_Blob from "./img/svg/Person_Blob.svg";
 export default function Login() {
+  function handleSubmit(ev) {
+    ev.preventDefault();
+    console.log("het werkt");
+  }
+
   return (
     <>
       <Header />
@@ -23,7 +28,7 @@ export default function Login() {
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="py-8 px-4 sm:rounded-lg sm:px-10">
-            <form className="space-y-6" action="#" method="POST">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label
                   htmlFor="email"
