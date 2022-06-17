@@ -46,7 +46,7 @@ export default function Home() {
       <Header />
 
       {/* Welcome section */}
-      <section className="grid grid-flow-row auto-rows-max text-center xl:h-[90vh]">
+      <section className="grid grid-flow-row text-center auto-rows-max ">
         <div className="mb-1 xl:mb-0">
           <img
             src={imgPuzzle}
@@ -72,8 +72,8 @@ export default function Home() {
       </section>
 
       {/* Trending section */}
-      <section className="grid auto-rows-max text-center place-items-center">
-        <h2 className="font-futura font-bold text-xl mt-[65px] mb-[30px] text-center md:text-3xl xl:mt-0 2xl:mt-10">
+      <section className="grid text-center auto-rows-max place-items-center">
+        <h2 className="font-futura font-bold text-xl mt-[65px] mb-[30px] text-center md:text-3xl xl:mt-16 2xl:mt-10">
           ACTUEEL
         </h2>
         <Feed />
@@ -83,19 +83,19 @@ export default function Home() {
       {/* Hero Section */}
       <section className="my-[50px]">
         <div className="relative">
-          <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100" />
+          <div className="absolute inset-x-0 bottom-0 bg-gray-100 h-1/2" />
           <div className="mx-auto">
             <div className="relative sm:overflow-hidden">
               <div className="absolute inset-0">
                 <img
-                  className="h-full w-full object-cover mix-blend-soft-light"
+                  className="object-cover w-full h-full mix-blend-soft-light"
                   src={imgHands}
                   alt="Reaching Hands"
                 />
                 <div className="absolute inset-0 bg-indigo-700 mix-blend-multiply" />
               </div>
               <div className="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
-                <h1 className="text-center tracking-tight">
+                <h1 className="tracking-tight text-center">
                   <span className="block text-white text-3xl sm:text-5xl lg:text-[70px] font-futura font-bold">
                     "THE MORE WE SHARE THE MORE WE HAVE"
                   </span>
