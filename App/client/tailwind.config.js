@@ -9,6 +9,9 @@ module.exports = {
         "1xl": "1450px",
         "3xl": "1920px",
       },
+      backgroundImage: {
+        "paperTexture" : "url('/src/img/paperTexture.jpeg')",
+      },
     },
     colors: {
       white: "#fff",
