@@ -1,16 +1,12 @@
-function Login() {
+import Header from "./layout/Header";
+import Footer from "./layout/Footer";
+import LoginForm from "./components/LoginForm";
+export default function Login() {
   return (
-    <>
-      <h1>Login here!</h1>
-
-      <form action="http://localhost:5000/api/user/login" method="post">
-        <input type="text" name="email" id="inputEmail" placeholder="Je email" />
-        <input type="password" name="password" id="inputPassword" placeholder="Je wachtwoord" />
-
-        <input type="submit" value="Register!" />
-      </form>
-    </>
+    <div className="h-screen">
+      <Header />
+      <LoginForm />
+      <Footer />
+    </div>
   );
 }
-
-export default Login;
