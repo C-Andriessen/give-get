@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
 import ReactDOM from "react-dom";
 import Home from "./Home";
-import Register from "./register";
+import Register from "./Register";
 import Login from "./Login";
 import "./index.css";
 
